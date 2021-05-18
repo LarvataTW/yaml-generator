@@ -9,6 +9,10 @@ NOW = $(shell date +"%Y%m%d_%H%M%S")
 FILENAME = $(shell basename -- ${target})
 NAME = $(shell basename ${FILENAME} .j2)
 
+.PHONY: build
+build: ## build docker image
+	docker build --rm -t yaml-generator .
+
 .PHONY: yaml
 yaml: ## generate yaml file
 	docker run --rm -i -v ${PWD}:/data -w /data -e TZ="Asia/Taipei" .....
