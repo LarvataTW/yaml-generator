@@ -19,7 +19,7 @@ yaml: ## generate yaml file
 
 .PHONY: apply
 apply: ## apply yaml into kubernetes
-	$(MAKE) yaml | kubectl apply -f -
+	@$(MAKE) --no-print-directory yaml | kubectl apply -f -
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 .PHONY: help
