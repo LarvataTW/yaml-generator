@@ -2,5 +2,6 @@
 
 targets:
 
-  - foo: bar
-    bar: foo
+  - domain: foobar.com
+    crt: public-content
+    key: private-content

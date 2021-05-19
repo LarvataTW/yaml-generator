@@ -4,6 +4,7 @@ import os
 import re
 import yaml
 import argparse
+import base64
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -38,15 +39,17 @@ def generate_content(yaml_file, template_file):
         keep_trailing_newline=True
     )
     j2_env.filters['debug'] = debug
+    j2_env.filters['encode'] = str.encode
+    j2_env.filters['b64encode'] = base64.b64encode
+    j2_env.filters['b64decode'] = base64.b64decode
 
     with open(yaml_file) as yml:
         yml = yaml.load(yml, Loader)
 
     template = j2_env.get_template(template_file)
 
-    for target in yml['targets']:
-        content = str(template.render(target))
-        print(content)
+    content = str(template.render(yml))
+    print(content)
 
     return yml
 
