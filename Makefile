@@ -15,11 +15,11 @@ build: ## build docker image
 
 .PHONY: yaml
 yaml: ## generate yaml file
-	docker run --rm -it -e TZ="Asia/Taipei" -v ${PWD}:/data -w /data yaml-generator python generator.py
+	@docker run --rm -it -e TZ="Asia/Taipei" -v ${PWD}:/data -w /data yaml-generator python generator.py
 
 .PHONY: apply
 apply: ## apply yaml into kubernetes
-	kubectl apply -f ...
+	$(MAKE) yaml | kubectl apply -f -
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 .PHONY: help

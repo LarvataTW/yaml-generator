@@ -1,15 +1,11 @@
 apiVersion: v1
-
 kind: Secret
-
 metadata:
   name: traefik-wildcard-cert
   namespace: kube-system
   annotations:
     yaml-generator: https://github.com/LarvataTW/yaml-generator
-
 type: Opaque
-
 data:
 {% for target in targets %}
   {{ target.domain }}.crt: {{ target.crt | encode64 | trim }}
