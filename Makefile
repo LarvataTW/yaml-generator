@@ -15,7 +15,7 @@ build: ## build docker image
 
 .PHONY: yaml
 yaml: ## generate yaml file
-	docker run --rm -i -v ${PWD}:/data -w /data -e TZ="Asia/Taipei" .....
+	docker run --rm -it -e TZ="Asia/Taipei" -v ${PWD}:/data -w /data yaml-generator python generator.py
 
 .PHONY: apply
 apply: ## apply yaml into kubernetes
