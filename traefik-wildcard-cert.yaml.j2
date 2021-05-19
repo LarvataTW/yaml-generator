@@ -12,6 +12,6 @@ type: Opaque
 
 data:
 {% for target in targets %}
-  {{ target.domain }}.crt: {{ target.crt | encode | b64encode | trim }}
-  {{ target.domain }}.key: {{ target.key | encode | b64encode | trim }}
+  {{ target.domain }}.crt: {{ target.crt | encode64 | trim }}
+  {{ target.domain }}.key: {{ target.key | encode64 | trim }}
 {% endfor %}

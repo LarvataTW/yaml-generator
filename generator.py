@@ -29,6 +29,10 @@ def debug(var):
     print(var)
     return ''
 
+def encode64(data):
+    result = base64.b64encode(bytes(data, "utf-8"))
+    return result.decode("utf-8")
+
 def generate_content(yaml_file, template_file):
     # Create the jinja2 environment.
     # Notice the use of trim_blocks, which greatly helps control whitespace.
@@ -39,9 +43,7 @@ def generate_content(yaml_file, template_file):
         keep_trailing_newline=True
     )
     j2_env.filters['debug'] = debug
-    j2_env.filters['encode'] = str.encode
-    j2_env.filters['b64encode'] = base64.b64encode
-    j2_env.filters['b64decode'] = base64.b64decode
+    j2_env.filters['encode64'] = encode64
 
     with open(yaml_file) as yml:
         yml = yaml.load(yml, Loader)
